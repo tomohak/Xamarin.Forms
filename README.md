@@ -1,2 +1,2 @@
-# Xamarin.Forms
-Xamarin.Forms Project Template
+# xf-samples
+Xamarin.Forms Project Samples
