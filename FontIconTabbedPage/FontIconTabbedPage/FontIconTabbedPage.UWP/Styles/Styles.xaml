@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FontIconTabbedPage.UWP.Styles"
+    xmlns:converters="using:FontIconTabbedPage.UWP.Converters">
+
+    <!-- XF Original HeaderTemplate https://github.com/xamarin/Xamarin.Forms/blob/8c5fd096945301a2db0d85baf77ce46812a8d89f/Xamarin.Forms.Platform.UAP/TabbedPageStyle.xaml#L6-L12 -->
+    <DataTemplate x:Key="TabbedPageHeaderTemplate">
+        <StackPanel Name="TabbedPageHeaderPanel">
+            <StackPanel.Resources>
+                <converters:FileImageSourceToFontIconConverter x:Key="FileImageSourceToFontIconConverter"/>
+            </StackPanel.Resources>
+            <ContentPresenter Name="TabbedPageHeaderIcon" Content="{Binding Icon, Converter={StaticResource ResourceKey=FileImageSourceToFontIconConverter}}"/>
+            <TextBlock Name="TabbedPageHeaderTextBlock" Text="{Binding Title}" Style="{ThemeResource BodyTextBlockStyle}" />
+        </StackPanel>
+    </DataTemplate>
+    
+</ResourceDictionary>
