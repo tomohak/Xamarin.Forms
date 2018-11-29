@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FontIconMasterDetailPage.UWP.Styles"
+    xmlns:converters="using:FontIconMasterDetailPage.UWP.Converters">
+
+    <DataTemplate x:Key="HomeMenuItemTemplate">
+        <Grid x:Name="ContentGrid" Height="40" HorizontalAlignment="Left">
+            <Grid.Resources>
+                <converters:FileImageSourceToFontIconConverter x:Key="FileImageSourceToFontIconConverter"/>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="IconColumn" Width="48"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox x:Name="IconBox"
+                     Margin="16,12">
+                <ContentPresenter Name="Icon" Content="{Binding Icon, Converter={StaticResource ResourceKey=FileImageSourceToFontIconConverter}}"/>
+            </Viewbox>
+            <TextBlock x:Name="Title" Text="{Binding Title}" FontSize="20" TextWrapping="NoWrap" VerticalAlignment="Center" Grid.Column="1" />
+        </Grid>
+    </DataTemplate>
+    
+</ResourceDictionary>

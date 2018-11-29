@@ -2,17 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FontIconMasterDetailPage.Views.MenuPage"
+             xmlns:controls="clr-namespace:FontIconMasterDetailPage.Controls"
              Title="Menu">
     <StackLayout VerticalOptions="FillAndExpand">
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="10">
-                            <Label Text="{Binding Title}" FontSize="20"/>
-                        </Grid>
-                    </ViewCell>
+                    <controls:HomeMenuItemControl Icon="{Binding Icon}" Title="{Binding Title}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

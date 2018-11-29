@@ -1,7 +1,5 @@
 ﻿using FontIconMasterDetailPage.Models;
-using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,8 +16,8 @@ namespace FontIconMasterDetailPage.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse", Icon=(Device.RuntimePlatform == Device.UWP ? "EA37" : "browse.png") },
+                new HomeMenuItem {Id = MenuItemType.About, Title="About", Icon=(Device.RuntimePlatform == Device.UWP ? "E946" : "about.png") }
             };
 
             ListViewMenu.ItemsSource = menuItems;

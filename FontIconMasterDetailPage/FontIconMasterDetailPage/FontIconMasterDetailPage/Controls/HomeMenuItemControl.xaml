@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="FontIconMasterDetailPage.Controls.HomeMenuItemControl"
+          x:Name="vc">
+  <ViewCell.View>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding Icon, Source={x:Reference vc}}"/>
+            <Label Text="{Binding Title, Source={x:Reference vc}}" FontSize="20" Grid.Column="1" />
+        </Grid>
+    </ViewCell.View>
+</ViewCell>

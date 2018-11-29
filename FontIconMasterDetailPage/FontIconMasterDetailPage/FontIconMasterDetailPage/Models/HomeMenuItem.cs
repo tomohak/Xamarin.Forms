@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace FontIconMasterDetailPage.Models
 {
@@ -14,5 +15,7 @@ namespace FontIconMasterDetailPage.Models
         public MenuItemType Id { get; set; }
 
         public string Title { get; set; }
+
+        public FileImageSource Icon { get; set; }
     }
 }
