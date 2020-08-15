@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BarcodeReaderSample
@@ -14,9 +11,14 @@ namespace BarcodeReaderSample
         [STAThread]
         static void Main()
         {
+            //Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ApplicationContext());
+            //Application.Run(new Forms.CameraForm());
+            //Application.Run(new Forms.SettingsForm());
+            //Application.Run(new Forms.AboutBox());
+
         }
     }
 }
