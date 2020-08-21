@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace BarcodeReaderSample.Forms
@@ -78,7 +79,12 @@ namespace BarcodeReaderSample.Forms
                     {
                         if (lastDetectedBarcodeValue != detectedBarcode.BarcodeValue)
                         {
-                            ExportCSV(detectedBarcode);
+                            if (SettingService.IsSaveToCSV)
+                                ExportCSV(detectedBarcode);
+
+                            if (SettingService.IsCopyToClipboard)
+                                CopyToClipboard(detectedBarcode);
+
                             lastDetectedBarcodeValue = detectedBarcode.BarcodeValue;
                         }
                     }
@@ -100,6 +106,16 @@ namespace BarcodeReaderSample.Forms
             {
                 w.WriteLine($"{barcodeDetectedResult.DetectedDateTime.ToString("yyyyMMdd hh:mm:ss")},{barcodeDetectedResult.BarcodeValue}");
             }
+        }
+
+        private void CopyToClipboard(BarcodeDetectedResult barcodeDetectedResult)
+        {
+            //Clipboard.SetText(detectedBarcode.BarcodeValue);
+
+            Thread thread = new Thread(() => Clipboard.SetText(barcodeDetectedResult.BarcodeValue));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            thread.Join();
         }
 
         private void CameraForm_FormClosing(object sender, FormClosingEventArgs e)

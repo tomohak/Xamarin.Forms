@@ -27,5 +27,31 @@
                     Properties.Settings.Default.CSVExportPath = value;
             }
         }
+
+        public static bool IsSaveToCSV
+        {
+            get
+            {
+                return Properties.Settings.Default.IsSaveToCSV;
+            }
+            set
+            {
+                if (Properties.Settings.Default.IsSaveToCSV != value)
+                    Properties.Settings.Default.IsSaveToCSV = value;
+            }
+        }
+
+        public static bool IsCopyToClipboard
+        {
+            get
+            {
+                return Properties.Settings.Default.IsCopyToClipboard;
+            }
+            set
+            {
+                if (Properties.Settings.Default.IsCopyToClipboard != value)
+                    Properties.Settings.Default.IsCopyToClipboard = value;
+            }
+        }
     }
 }

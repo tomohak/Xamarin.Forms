@@ -46,5 +46,29 @@ namespace BarcodeReaderSample.Properties {
                 this["CSVExportPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsSaveToCSV {
+            get {
+                return ((bool)(this["IsSaveToCSV"]));
+            }
+            set {
+                this["IsSaveToCSV"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsCopyToClipboard {
+            get {
+                return ((bool)(this["IsCopyToClipboard"]));
+            }
+            set {
+                this["IsCopyToClipboard"] = value;
+            }
+        }
     }
 }

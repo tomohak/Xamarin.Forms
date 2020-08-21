@@ -48,10 +48,14 @@ namespace BarcodeReaderSample.Forms
                 i++;
             }
 
+            CSVCheckBox.Checked = SettingService.IsSaveToCSV;
+            CSVGroupBox.Enabled = SettingService.IsSaveToCSV;
+
             if (string.IsNullOrEmpty(SettingService.CSVExportPath))
                 SettingService.CSVExportPath = AppDomain.CurrentDomain.BaseDirectory;
-
             CSVDirectoryTextBox.Text = SettingService.CSVExportPath;
+
+            ClipboardCheckBox.Checked = SettingService.IsCopyToClipboard;
         }
 
         private void StartCameraPreview()
@@ -69,6 +73,19 @@ namespace BarcodeReaderSample.Forms
         {
             var selectedItem = CameraComboBox.SelectedItem;
             SettingService.CameraDeviceName = selectedItem.ToString();
+        }
+
+        private void CSVCheckBox_Click(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            SettingService.IsSaveToCSV = checkBox.Checked;
+            CSVGroupBox.Enabled = checkBox.Checked;
+        }
+
+        private void ClipboardCheckBox_Click(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            SettingService.IsCopyToClipboard = checkBox.Checked;
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -114,6 +131,7 @@ namespace BarcodeReaderSample.Forms
 
         private void SettingsForm_Disposed(object sender, EventArgs e)
         {
+
         }
     }
 }
