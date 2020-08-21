@@ -31,7 +31,7 @@ PCカメラを使ってバーコードを読み取るアプリのサンプルで
   - 使用するカメラの選択
   - 読み取ったバーコード情報を保存するCSVファイルの作成先ディレクトリ  
 
-  ![BarcodeReaderSample_image3](https://user-images.githubusercontent.com/45218829/90587531-95e11180-e214-11ea-8689-ddd1dff3cf16.png)
+  ![BarcodeReaderSample_image4](https://user-images.githubusercontent.com/45218829/90850967-39195e80-e3ae-11ea-9b20-b9f1ace2e3ba.png)
 
 #### ライセンス
 MIT
