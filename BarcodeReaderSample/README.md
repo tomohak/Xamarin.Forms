@@ -34,7 +34,7 @@ PCカメラを使ってバーコードを読み取るアプリのサンプルで
     - CSVファイルの作成先ディレクトリ  
   - 読み取ったバーコード情報をクリップボードに保存するかどうか
 
-  ![BarcodeReaderSample_image4](https://user-images.githubusercontent.com/45218829/90850967-39195e80-e3ae-11ea-9b20-b9f1ace2e3ba.png)
+  ![BarcodeReaderSample_image5](https://user-images.githubusercontent.com/45218829/90979073-6c661400-e58d-11ea-8fdb-cc7a547e2661.png)
 
 #### ライセンス
 MIT
