@@ -67,6 +67,9 @@ namespace BarcodeReaderSample.Forms
 
         private async void VideoDevice_FrameArrived(object sender, NewFrameEventArgs eventArgs)
         {
+            if (SettingService.IsMirror)
+                eventArgs.Frame.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
             if (!await semaphore.WaitAsync(0))
                 return;
 
@@ -74,11 +77,13 @@ namespace BarcodeReaderSample.Forms
             {
                 using (Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone())
                 {
-                    var detectedBarcode = barcodeService.DetectBarcodeFromBitmap(bitmap);
+                    var detectedBarcode = barcodeService.DetectBarcodeFromBitmap(bitmap); 
                     if (detectedBarcode != null)
                     {
                         if (lastDetectedBarcodeValue != detectedBarcode.BarcodeValue)
                         {
+                            WriteTextSafe(detectedBarcode.BarcodeValue);
+
                             if (SettingService.IsSaveToCSV)
                                 ExportCSV(detectedBarcode);
 
@@ -93,6 +98,21 @@ namespace BarcodeReaderSample.Forms
             finally
             {
                 semaphore.Release();
+            }
+        }
+
+        public delegate void SafeCallDelegate(string text);
+
+        private void WriteTextSafe(string text)
+        {
+            if (label1.InvokeRequired)
+            {
+                var d = new SafeCallDelegate(WriteTextSafe);
+                label1.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                label1.Text = text;
             }
         }
 
@@ -155,12 +175,14 @@ namespace BarcodeReaderSample.Forms
             StartCapture();
             pictureBox1.Visible = false;
             videoSourcePlayer1.Visible = true;
+            label1.Visible = true;
         }
 
         private void videoSourcePlayer1_Click(object sender, EventArgs e)
         {
             CloseCurrentVideoSource();
             videoSourcePlayer1.Visible = false;
+            label1.Visible = false;
             pictureBox1.Visible = true;
         }
     }

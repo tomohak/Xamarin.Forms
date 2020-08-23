@@ -53,5 +53,18 @@
                     Properties.Settings.Default.IsCopyToClipboard = value;
             }
         }
+
+        public static bool IsMirror
+        {
+            get
+            {
+                return Properties.Settings.Default.IsMirror;
+            }
+            set
+            {
+                if (Properties.Settings.Default.IsMirror != value)
+                    Properties.Settings.Default.IsMirror = value;
+            }
+        }
     }
 }

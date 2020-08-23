@@ -39,7 +39,9 @@ namespace BarcodeReaderSample.Forms
             {
                 CameraComboBox.Items.Add(device.Name);
                 if (SettingService.CameraDeviceName == device.MonikerString)
+                {
                     CameraComboBox.SelectedIndex = i;
+                }
                 else if (string.IsNullOrEmpty(SettingService.CameraDeviceName))
                 {
                     SettingService.CameraDeviceName = device.MonikerString;
@@ -48,6 +50,7 @@ namespace BarcodeReaderSample.Forms
                 i++;
             }
 
+            IsMirrorCheckBox.Checked = SettingService.IsMirror;
             CSVCheckBox.Checked = SettingService.IsSaveToCSV;
             CSVGroupBox.Enabled = SettingService.IsSaveToCSV;
 
@@ -60,12 +63,32 @@ namespace BarcodeReaderSample.Forms
 
         private void StartCameraPreview()
         {
+            StopCameraPreview();
+
             if (hasCameraDevice)
             {
                 videoDevice = new VideoCaptureDevice(videoDevices[CameraComboBox.SelectedIndex].MonikerString);
-                CloseCurrentVideoSource();
+                videoDevice.NewFrame += VideoDevice_NewFrame;
                 videoSourcePlayer1.VideoSource = videoDevice;
                 videoSourcePlayer1.Start();
+            }
+        }
+
+        private void StopCameraPreview()
+        {
+            CloseCurrentVideoSource();
+            if (videoDevice != null)
+            {
+                videoDevice.NewFrame -= VideoDevice_NewFrame;
+                videoDevice = null;
+            }
+        }
+
+        private void VideoDevice_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        {
+            if (SettingService.IsMirror)
+            {
+                eventArgs.Frame.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
             }
         }
 
@@ -73,6 +96,13 @@ namespace BarcodeReaderSample.Forms
         {
             var selectedItem = CameraComboBox.SelectedItem;
             SettingService.CameraDeviceName = selectedItem.ToString();
+        }
+
+        private void IsMirrorCheckBox_Click(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            SettingService.IsMirror = checkBox.Checked;
+            StartCameraPreview();
         }
 
         private void CSVCheckBox_Click(object sender, EventArgs e)
@@ -99,7 +129,7 @@ namespace BarcodeReaderSample.Forms
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CloseCurrentVideoSource();
+            StopCameraPreview();
         }
 
         private void CloseCurrentVideoSource()

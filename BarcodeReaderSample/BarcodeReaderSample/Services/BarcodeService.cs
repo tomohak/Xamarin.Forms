@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -12,7 +13,15 @@ namespace BarcodeReaderSample.Services
 
         public BarcodeService()
         {
-            barcodeReader = new ZXing.BarcodeReader();
+            barcodeReader = new ZXing.BarcodeReader()
+            {
+                AutoRotate = true,
+                TryInverted = true
+            };
+
+            //List<ZXing.BarcodeFormat> barcodeFormats = new List<ZXing.BarcodeFormat>();
+            //barcodeFormats.Add(ZXing.BarcodeFormat.DATA_MATRIX);
+            //barcodeReader.Options.PossibleFormats = barcodeFormats;
         }
 
         public BarcodeDetectedResult DetectBarcodeFromBitmap(System.Drawing.Bitmap _bitmap)

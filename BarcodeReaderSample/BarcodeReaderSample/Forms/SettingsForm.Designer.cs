@@ -41,6 +41,7 @@
             this.CSVGroupBox = new System.Windows.Forms.GroupBox();
             this.ClipboardCheckBox = new System.Windows.Forms.CheckBox();
             this.BarcodeDataLabel = new System.Windows.Forms.Label();
+            this.IsMirrorCheckBox = new System.Windows.Forms.CheckBox();
             this.CSVGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,20 +49,20 @@
             // 
             this.CameraPreviewLabel.AutoSize = true;
             this.CameraPreviewLabel.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Bold);
-            this.CameraPreviewLabel.Location = new System.Drawing.Point(23, 15);
+            this.CameraPreviewLabel.Location = new System.Drawing.Point(20, 15);
             this.CameraPreviewLabel.Name = "CameraPreviewLabel";
-            this.CameraPreviewLabel.Size = new System.Drawing.Size(91, 15);
+            this.CameraPreviewLabel.Size = new System.Drawing.Size(47, 15);
             this.CameraPreviewLabel.TabIndex = 1;
-            this.CameraPreviewLabel.Text = "Camera preview";
+            this.CameraPreviewLabel.Text = "Camera";
             // 
             // CameraComboBox
             // 
             this.CameraComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CameraComboBox.FormattingEnabled = true;
-            this.CameraComboBox.Location = new System.Drawing.Point(23, 182);
+            this.CameraComboBox.Location = new System.Drawing.Point(23, 174);
             this.CameraComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CameraComboBox.Name = "CameraComboBox";
-            this.CameraComboBox.Size = new System.Drawing.Size(129, 20);
+            this.CameraComboBox.Size = new System.Drawing.Size(120, 20);
             this.CameraComboBox.TabIndex = 4;
             this.CameraComboBox.SelectionChangeCommitted += new System.EventHandler(this.CameraComboBox_SelectionChangeCommitted);
             // 
@@ -89,18 +90,18 @@
             // CameraComboBoxLabel
             // 
             this.CameraComboBoxLabel.AutoSize = true;
-            this.CameraComboBoxLabel.Location = new System.Drawing.Point(23, 168);
+            this.CameraComboBoxLabel.Location = new System.Drawing.Point(21, 160);
             this.CameraComboBoxLabel.Name = "CameraComboBoxLabel";
-            this.CameraComboBoxLabel.Size = new System.Drawing.Size(120, 12);
+            this.CameraComboBoxLabel.Size = new System.Drawing.Size(83, 12);
             this.CameraComboBoxLabel.TabIndex = 12;
-            this.CameraComboBoxLabel.Text = "Default camera device";
+            this.CameraComboBoxLabel.Text = "Default camera";
             // 
             // videoSourcePlayer1
             // 
-            this.videoSourcePlayer1.Location = new System.Drawing.Point(23, 37);
+            this.videoSourcePlayer1.Location = new System.Drawing.Point(23, 32);
             this.videoSourcePlayer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.videoSourcePlayer1.Name = "videoSourcePlayer1";
-            this.videoSourcePlayer1.Size = new System.Drawing.Size(129, 122);
+            this.videoSourcePlayer1.Size = new System.Drawing.Size(120, 120);
             this.videoSourcePlayer1.TabIndex = 15;
             this.videoSourcePlayer1.Text = "videoSourcePlayer1";
             this.videoSourcePlayer1.VideoSource = null;
@@ -171,11 +172,23 @@
             this.BarcodeDataLabel.TabIndex = 22;
             this.BarcodeDataLabel.Text = "Barcode data";
             // 
+            // IsMirrorCheckBox
+            // 
+            this.IsMirrorCheckBox.AutoSize = true;
+            this.IsMirrorCheckBox.Location = new System.Drawing.Point(89, 199);
+            this.IsMirrorCheckBox.Name = "IsMirrorCheckBox";
+            this.IsMirrorCheckBox.Size = new System.Drawing.Size(54, 16);
+            this.IsMirrorCheckBox.TabIndex = 23;
+            this.IsMirrorCheckBox.Text = "Mirror";
+            this.IsMirrorCheckBox.UseVisualStyleBackColor = true;
+            this.IsMirrorCheckBox.Click += new System.EventHandler(this.IsMirrorCheckBox_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 225);
+            this.Controls.Add(this.IsMirrorCheckBox);
             this.Controls.Add(this.BarcodeDataLabel);
             this.Controls.Add(this.ClipboardCheckBox);
             this.Controls.Add(this.CSVGroupBox);
@@ -211,5 +224,6 @@
         private System.Windows.Forms.GroupBox CSVGroupBox;
         private System.Windows.Forms.CheckBox ClipboardCheckBox;
         private System.Windows.Forms.Label BarcodeDataLabel;
+        private System.Windows.Forms.CheckBox IsMirrorCheckBox;
     }
 }

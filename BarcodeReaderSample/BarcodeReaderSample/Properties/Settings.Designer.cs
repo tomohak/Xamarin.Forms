@@ -70,5 +70,17 @@ namespace BarcodeReaderSample.Properties {
                 this["IsCopyToClipboard"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsMirror {
+            get {
+                return ((bool)(this["IsMirror"]));
+            }
+            set {
+                this["IsMirror"] = value;
+            }
+        }
     }
 }

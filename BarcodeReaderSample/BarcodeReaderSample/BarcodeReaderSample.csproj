@@ -182,7 +182,7 @@
       <Version>2.2.5</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net">
-      <Version>0.16.5</Version>
+      <Version>0.16.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
