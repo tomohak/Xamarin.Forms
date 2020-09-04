@@ -77,7 +77,7 @@ namespace BarcodeReaderSample.Forms
             {
                 using (Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone())
                 {
-                    var detectedBarcode = barcodeService.DetectBarcodeFromBitmap(bitmap); 
+                    var detectedBarcode = await barcodeService.DetectBarcodeFromBitmapAsync(bitmap);
                     if (detectedBarcode != null)
                     {
                         if (lastDetectedBarcodeValue != detectedBarcode.BarcodeValue)

@@ -37,7 +37,7 @@ namespace BarcodeReaderSample.Forms
             int i = 0;
             foreach (FilterInfo device in videoDevices)
             {
-                CameraComboBox.Items.Add(device.Name);
+                CameraComboBox.Items.Add(device);
                 if (SettingService.CameraDeviceName == device.MonikerString)
                 {
                     CameraComboBox.SelectedIndex = i;
@@ -49,6 +49,8 @@ namespace BarcodeReaderSample.Forms
                 }
                 i++;
             }
+            CameraComboBox.DisplayMember = nameof(FilterInfo.Name);
+            CameraComboBox.ValueMember = nameof(FilterInfo.MonikerString);
 
             IsMirrorCheckBox.Checked = SettingService.IsMirror;
             CSVCheckBox.Checked = SettingService.IsSaveToCSV;
@@ -67,7 +69,7 @@ namespace BarcodeReaderSample.Forms
 
             if (hasCameraDevice)
             {
-                videoDevice = new VideoCaptureDevice(videoDevices[CameraComboBox.SelectedIndex].MonikerString);
+                videoDevice = new VideoCaptureDevice(SettingService.CameraDeviceName);
                 videoDevice.NewFrame += VideoDevice_NewFrame;
                 videoSourcePlayer1.VideoSource = videoDevice;
                 videoSourcePlayer1.Start();
@@ -95,7 +97,11 @@ namespace BarcodeReaderSample.Forms
         private void CameraComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             var selectedItem = CameraComboBox.SelectedItem;
-            SettingService.CameraDeviceName = selectedItem.ToString();
+            if (selectedItem is FilterInfo filterInfo)
+            {
+                SettingService.CameraDeviceName = filterInfo.MonikerString;
+                StartCameraPreview();
+            }
         }
 
         private void IsMirrorCheckBox_Click(object sender, EventArgs e)

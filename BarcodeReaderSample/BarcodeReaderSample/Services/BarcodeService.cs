@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace BarcodeReaderSample.Services
 {
@@ -15,8 +16,9 @@ namespace BarcodeReaderSample.Services
         {
             barcodeReader = new ZXing.BarcodeReader()
             {
-                AutoRotate = true,
-                TryInverted = true
+                //AutoRotate = true,
+                //TryInverted = true,
+                Options = new ZXing.Common.DecodingOptions { TryHarder = true }
             };
 
             //List<ZXing.BarcodeFormat> barcodeFormats = new List<ZXing.BarcodeFormat>();
@@ -24,26 +26,40 @@ namespace BarcodeReaderSample.Services
             //barcodeReader.Options.PossibleFormats = barcodeFormats;
         }
 
-        public BarcodeDetectedResult DetectBarcodeFromBitmap(System.Drawing.Bitmap _bitmap)
+        public async Task<BarcodeDetectedResult> DetectBarcodeFromBitmapAsync(System.Drawing.Bitmap _bitmap)
         {
             try
             {
                 using (System.Drawing.Bitmap bitmap = (System.Drawing.Bitmap)_bitmap.Clone())
                 {
-                    ZXing.LuminanceSource source = BitmapToLuminanceSource(bitmap);
-                    ZXing.Result result = barcodeReader.Decode(source);
-                    if (result != null)
+                    return await Task.Run(() =>
                     {
-                       return new BarcodeDetectedResult((int)result.BarcodeFormat, result.Text);
-                    }
+                        var result = Decode(_bitmap);
+                        if (result == null)
+                        {
+                            _bitmap.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipX);
+                            result = Decode(_bitmap);
+                        }
+                        if (result != null)
+                        {
+                            return new BarcodeDetectedResult((int)result.BarcodeFormat, result.Text);
+                        }
+                        return null;
+                    });
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Debug.WriteLine(string.Format("DetectBarcodeFromBitmap exception:{0}", ex.Message));
-            };
+            }           
 
             return null;
+        }
+
+        private ZXing.Result Decode(System.Drawing.Bitmap bitmap)
+        {
+            ZXing.LuminanceSource source = BitmapToLuminanceSource(bitmap);
+            return barcodeReader.Decode(source);
         }
         
         private ZXing.LuminanceSource BitmapToLuminanceSource(System.Drawing.Bitmap bitmap)
